@@ -27,4 +27,18 @@ class UserController extends Controller
 
         return view('about',['data'=>$users]);
     }
+
+    public function add_student(Request $req)
+    {
+        $user=DB::table('student')->insert([
+            'name'=>$req->name ,
+            'city'=>$req->city,
+            'city_id'=>$req->city_id
+        ]);
+
+        if($user)
+        {
+            return redirect()->route('show_student');
+        }
+    }
 }

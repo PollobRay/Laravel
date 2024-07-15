@@ -43,18 +43,26 @@ Route::get('/routetoview',function()
 
 })->name('routetoview');
 
+Route::get('/add',function() 
+{
+
+    return view('add_student');  
+
+})->name('add');
+
 
 //        >>>>>>>>>>>> Conrolller Route <<<<<<<<<<<<<<<<<<<<<<<<<<
 // ------------------------------------------------------------------
-Route::get('/usercontroller',[UserController::class,'show']);  // show is method
+Route::get('/usercontroller',[UserController::class,'show'])->name('show_student');  // show is method
 Route::get('/usercontroller/query/{id}',[UserController::class,'my_query'])->name('my_query')->whereNumber('id');  
+Route::post('/add_student',[UserController::class,'add_student'])->name('add_student');  
 
 
 //    >>> Making 'localhost/about'  route <<<
 Route::get('/about',function()  // It is 'localhost/about' route
 {
     return view('about');   // It is about page
-});
+})->name('about');
 // same as
 //Route::view('about','/about'); // First about is file name second about is route
 
