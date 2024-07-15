@@ -4,5 +4,6 @@
 @section('content') <!-- push some code into at yeild('content') of master.blade --> 
 
     <h1>It is About Page</h1>
+    <a href="{{route('post_page')}}">post page</a>
 
 @endsection
