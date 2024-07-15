@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,25 @@ Route::get('/second',function()
 {
     return view('second');  
 })->name('second');
+
+Route::get('/js',function() 
+{
+    return view('js_in_blade');  
+})->name('js');
+
+Route::get('/routetoview',function() 
+{
+    $userName='Pollob Ray';
+
+    return view('pass_data_route_to_view',['userName'=>$userName]);  
+
+})->name('routetoview');
+
+
+//        >>>>>>>>>>>> Conrolller Route <<<<<<<<<<<<<<<<<<<<<<<<<<
+// ------------------------------------------------------------------
+Route::get('/usercontroller',[UserController::class,'show']);  // show is method
+Route::get('/usercontroller/query/{id}',[UserController::class,'my_query'])->name('my_query')->whereNumber('id');  
 
 
 //    >>> Making 'localhost/about'  route <<<

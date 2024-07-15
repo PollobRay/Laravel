@@ -5,5 +5,11 @@
 
     <h1>It is About Page</h1>
     <a href="{{route('post_page')}}">post page</a>
+    <br>
+
+    @foreach ($data as $item)
+        {{$item->name}}
+        <br>
+    @endforeach
 
 @endsection
