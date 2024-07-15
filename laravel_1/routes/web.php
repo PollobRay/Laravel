@@ -19,6 +19,15 @@ Route::get('/', function () {
 
 
 //              <-----------  Making Routes  ----------------> 
+Route::get('/example',function() 
+{
+    return view('example');  
+})->name('example');
+
+Route::get('/second',function() 
+{
+    return view('second');  
+})->name('second');
 
 
 //    >>> Making 'localhost/about'  route <<<
@@ -65,7 +74,7 @@ return '@ num is: '.$at_num;
 
 Route::get('/post', function()
 {
-    return "It is Post page with named route";
+    return '<h1>It is Post page with named route</h1>';
 })->name('post_page');    // i.e  <a href="{{route('post_page')}}">post</a>
 
 
@@ -75,6 +84,19 @@ Route::get('/post', function()
 // ************************************************************
 //Route::redirect('/about','/post',301);   // old_route, new_route, 301 means permanet
 
+
+
 // ************************************************************
 //            <<  Route Group>>
 // ************************************************************
+// It will work for 'localhost/page/about' and 'localhost/page/post'
+/*
+Route::prefix('page')->group(function(){
+    Route::get('/post',function(){
+
+    });
+    Route::get('/about',function(){
+        
+    });
+});
+*/
