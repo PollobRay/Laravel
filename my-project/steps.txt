@@ -1,0 +1,83 @@
+1. first download and install
+	composer-setup.exe
+	
+during install set php path from xammp
+proxy no need to set
+
+2. read laravel docs making version 10x
+
+3. advantages of laravel is the projects no need to make inside the xammp/htdocs folder, just on xammp server and make any where the project files.
+
+4. open cmd on project folder and put the command on cmd
+	composer create-project laravel/laravel:^10.0 my-project 
+
+	Required: Download xammp with php8.1 version 
+
+5. open project folder on vscode
+
+6. open new terminal 
+
+7. on server paste on terminal-
+	php artisan serve
+
+8. go to browser and paste 
+	http://127.0.0.1:8000 
+
+9. create database from locahost/phpmyadmin
+	my_project
+
+10. on vs code environment-> .env -> Set DB_DATABASE=my_project  (line no 14)
+
+11. open a new terminal from vscode and paste
+	php artisan migrate
+
+	then some tables are automatically created in ray_db database 
+
+12. let, we want to create a model(Class) 'Post' (first letter should be capital) '-m' used to migrate automatically 
+	php artisan make:model Post -m
+
+	model is created inside of Model-> post.php
+	and migrate file created inside database->migrate-> _________create_posts_table.php
+
+13. now open new model migrate file database->migrate-> _________create_posts_table.php
+	change this to make a table in database 
+
+	public function up(): void
+    {
+        Schema::create('posts', function (Blueprint $table) {
+            $table->id();
+            $table->string("title");
+            $table->string("description")->nullable();
+            $table->timestamps();
+        });
+    }
+
+	this is created a table named 'posts' which contains id,title,description, timestamp as column
+
+14. now migrate in terminal 
+	php artisan migrate
+
+15. if we done wrong mirgrate or have to chnage table format 
+	first drop the table 'posts' and in table 'mirgrate'  delete the row which is contain 'posts' timestamp 
+	the agrin migrate (step 14)
+
+16. create a new controller 
+	php artisan make:controller PostController
+
+	it created in Http->controller->PostController.php
+	open this and also create some function 
+
+17. route->web.php
+	call PostController function 
+	and goto browser http://127.0.0.1:8000/posts visit 
+
+18. resource ->view -> create folder name "layout"-> create file "master.blade.php"
+
+19. download bootsrap and extact
+	vscode-> public -> make folder 'assets' ->make folder 'css', 'js' & 'image' 
+	also paste bootrap css and js file into that 
+
+20. write html code into master.blade.php
+
+21. create file in views ->'posts.blade.php'
+
