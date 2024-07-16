@@ -45,9 +45,7 @@ Route::get('/routetoview',function()
 
 Route::get('/add',function() 
 {
-
     return view('add_student');  
-
 })->name('add');
 
 
@@ -57,6 +55,7 @@ Route::get('/usercontroller',[UserController::class,'show'])->name('show_student
 Route::get('/usercontroller/query/{id}',[UserController::class,'my_query'])->name('my_query')->whereNumber('id');  
 Route::post('/add_student',[UserController::class,'add_student'])->name('add_student');  
 
+Route::post('/customer',[CustomerController::class,'indext'])->name('acustomer');  
 
 //    >>> Making 'localhost/about'  route <<<
 Route::get('/about',function()  // It is 'localhost/about' route
