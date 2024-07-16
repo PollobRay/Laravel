@@ -1,2 +1,12 @@
 1. Eloquent ORM (Object Relational Mapper)
     ->>> perform CRUD operation to 'member' table.
+
+2. User Resistation and Login
+	ProfileController
+
+    Install Breeze:
+    > composer require laravel/breeze --dev
+    >php artisan breeze:Install
+    >blade (select) <--(enter)
+    >no <--- (enter)
+    >0 (phpunit) <--- (enter)
