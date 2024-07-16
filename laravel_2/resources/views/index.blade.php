@@ -25,7 +25,13 @@
                         <th scope="row">{{$loop->iteration}}</th>
                         <td>{{$member->name}}</td>
                         <td>{{$member->description}}</td>
-                        <td>{{$member->image}}</td>
+                        <td>
+                            <div class="d-flex justify-content-around">
+                                <a href="{{route('view_member',$member->id)}}" type="button" class="btn btn-primary">View</a>
+                                <a href="{{route('update',$member->id)}}" type="button" class="btn btn-success">Update</a>
+                                <a type="button" class="btn btn-danger">Delete</a>
+                            </div>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

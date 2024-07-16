@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Member;
+use Illuminate\Support\Facades\File;
+
 
 class MemberController extends Controller
 {
@@ -16,9 +18,11 @@ class MemberController extends Controller
     }
 
     // show detail of member
-    public function show()
+    public function show(int $id)
     {
+        $member = Member::find($id);
 
+        return view('view_member',['member'=>$member]); 
     }
 
     // create member
@@ -52,15 +56,48 @@ class MemberController extends Controller
     }
 
     //edit member detail
-    public function edit()
+    public function edit(int $id)
     {
+        $member = Member::find($id);
 
+        return view('update_member',['member'=>$member]);
     }
 
     // update member
-    public function update()
+    public function update(Request $request,int $id)
     {
+        $request->validate([
+            'name'=>'required | max:255 | string',
+            'description'=>'required | max:255 | string',
+            'image'=> 'nullable | mimes:png,jpg,jpeg'
+        ]);
 
+        // To delete previous image from storage
+        $member = Member::find($id);
+        $image = $member->image;
+        if($request->has('image'))
+        {
+            if(File::exists($member->image))
+            {
+                File::delete($member->image); //delete image from storage
+            }
+
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $file_name = time().'.'.$extension;
+            $path = 'uploads/member/';
+            $file->move($path, $file_name);
+            $image = $path.$file_name;
+        }
+
+        Member::where('id',$id)->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'image' => $image
+        ]);
+
+        return redirect()->route('update',$id)->with('status','User Information Updated Successfully');
+        
     }
 
     // delete member
