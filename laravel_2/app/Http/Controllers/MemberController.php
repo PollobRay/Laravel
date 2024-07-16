@@ -96,14 +96,24 @@ class MemberController extends Controller
             'image' => $image
         ]);
 
-        return redirect()->route('update',$id)->with('status','User Information Updated Successfully');
+        return redirect()->route('update',$id)->with('status','Member Information Updated Successfully');
         
     }
 
     // delete member
-    public function destroy()
+    public function destroy(Request $request)
     {
+        $id = $request->id;
+        $member = Member::find($id);
 
+        if(File::exists($member->image))
+        {
+            File::delete($member->image); //delete image from storage
+        }
+
+        Member::destroy($id);
+
+        return redirect()->route('home')->with('status','Member Deleted Successfully');
     }
 
 }
